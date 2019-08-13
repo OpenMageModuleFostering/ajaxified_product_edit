@@ -58,7 +58,7 @@ class Alekseon_AjaxifiedProductEdit_Adminhtml_AjaxifiedProductEdit_ManageGridVie
         }
         
         $this->_getSession()->addSuccess(
-            Mage::helper('alekseon_ajaxifiedProductEdit')->__('Grid View set has been saved.')
+            Mage::helper('alekseon_ajaxifiedProductEdit')->__('Grid View set has been removed.')
         );
         
         $this->getResponse()->setRedirect($this->getUrl('*/ajaxifiedProductEdit_manageGridViews'));

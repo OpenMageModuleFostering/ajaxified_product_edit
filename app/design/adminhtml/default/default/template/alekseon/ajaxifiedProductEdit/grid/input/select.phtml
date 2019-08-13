@@ -7,6 +7,19 @@
  */
 ?>
 <?php $options = $this->getColumn()->getOptions() ?>
+<?php if (!is_null($this->getValue()) && !isset($options[$this->getValue()])): ?>
+    <?php
+        /*
+        its because of magento "bug", when grid is filtered and sorded by same attibute, and this attribute has options managed from BO (ex. color),
+        then value of this attibute is label, instead of option id :(
+        Its because of function addOptionValueToCollection in class Mage_Eav_Model_Resource_Entity_Attribute_Option:
+        last joinLeft in this method its not needed, because atribute value was already joined by filters, so this columns is joined twice, and its a reason of issue
+        */
+    ?>
+    <?php $selectOptionByLabel = true ?>
+<?php else: ?>
+    <?php $selectOptionByLabel = false ?>
+<?php endif ?>
 <?php $disabled = '' ?>
 <?php if ($this->getDisabled()): ?>
     <?php $disabled = 'disabled="disabled"' ?>    
@@ -15,7 +28,7 @@
     <select name="<?php echo $this->getName() ?>[value]" id="<?php echo $this->getName() ?>" <?php echo $disabled ?> onchange="rowChanged(<?php echo $this->getRowId() ?>)" >
         <?php if ($options): ?>
             <?php foreach($options as $optionsValue => $label): ?>
-                <?php if ($this->getValue() == $optionsValue): ?>
+                <?php if (($this->getValue() == $optionsValue && !$selectOptionByLabel) || ($this->getValue() == $label && $selectOptionByLabel)): ?>
                     <option value="<?php echo $optionsValue ?>" selected="selected"><?php echo $label ?></option>
                 <?php else: ?>
                     <option value="<?php echo $optionsValue ?>"><?php echo $label ?></option>

@@ -42,14 +42,21 @@ class Alekseon_AjaxifiedProductEdit_Block_Adminhtml_GridView_Grid_Renderer_Input
         $column = $this->getColumn();
         $index = $column->getIndex();
         $attribute = $column->getAttribute();
+ 
         if ($attribute && $attribute->getApplyTo() && !in_array($row->getData('type_id'), $attribute->getApplyTo())) {
             return '<i style="color:grey">' . Mage::helper('alekseon_ajaxifiedProductEdit')->__('Not available for %s product.', $row->getData('type_id')) . '</i>';
         } elseif (!$this->_isAttributeInAttributeSet($index, $row->getData('attribute_set_id'))) {
             return '<i style="color:grey">' . Mage::helper('alekseon_ajaxifiedProductEdit')->__('Not available for this attribute set.') . '</i>';
         } elseif ($inputBlock = $this->getInputBlock()) {
+            
+            $attributeDefaultValue = null;
+            if ($attribute && $attribute->getDefaultValue()) {       
+                $attributeDefaultValue = $attribute->getDefaultValue();
+            }
+
             $scope = $column->getScope();
-            $value = $row->getData($index);
-            $defaultValue = $row->getData($index . '_defaultValue');
+            $value = is_null($row->getData($index)) ? $attributeDefaultValue : $row->getData($index);
+            $defaultValue = is_null($row->getData($index . '_defaultValue')) ? $attributeDefaultValue : $row->getData($index . '_defaultValue');
             $rowId = $row->getData('entity_id');
             $name = 'product[' . $rowId . '][' . $index . ']';            
 

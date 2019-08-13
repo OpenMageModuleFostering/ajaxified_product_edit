@@ -10,6 +10,7 @@ $installer = $this;
 $installer->startSetup();
 $installer->run("
 
+DROP TABLE IF EXISTS {$this->getTable('alekseon_ajaxifiedProductEdit/gridview')};
 CREATE TABLE {$this->getTable('alekseon_ajaxifiedProductEdit/gridview')} (
   `id` int(10) unsigned NOT NULL auto_increment,
   `label` varchar(255) default NULL,
@@ -19,6 +20,7 @@ CREATE TABLE {$this->getTable('alekseon_ajaxifiedProductEdit/gridview')} (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS {$this->getTable('alekseon_ajaxifiedProductEdit/gridview_attributeColumns')};
 CREATE TABLE {$this->getTable('alekseon_ajaxifiedProductEdit/gridview_attributeColumns')} (
   `id` int(10) unsigned NOT NULL auto_increment,
   `grid_view_id` int(10) unsigned,

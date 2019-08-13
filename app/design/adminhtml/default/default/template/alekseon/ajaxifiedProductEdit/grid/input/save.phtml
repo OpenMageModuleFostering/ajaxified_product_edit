@@ -1,0 +1,14 @@
+<?php
+/**
+ * @author    Marcin Frymark
+ * @email     contact@alekseon.com
+ * @company   Alekseon
+ * @website   www.alekseon.com
+ */
+?>
+<?php $saveUrl = $this->getUrl('adminhtml/ajaxifiedProductEdit/saveRow', array('rowId' => $this->getRowId())) ?>
+<button type="button" id="save_button_<?php echo $this->getRowId() ?>" class="disabled save_button" onclick="saveRow('<?php echo $saveUrl ?>', '<?php echo $this->getRowId() ?>')" >
+    <span><?php echo $this->__('Save') ?></span>
+</button>
+<br />
+<span id="save_button_message_<?php echo $this->getRowId() ?>"></span>

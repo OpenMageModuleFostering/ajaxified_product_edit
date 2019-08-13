@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Marcin Frymark
+ * @email     contact@alekseon.com
+ * @company   Alekseon
+ * @website   www.alekseon.com
+ */
+-->
+<config>
+    <menu>
+        <system>
+            <children>
+                <alekseon_ajaxifiedProductEdit translate="title" module="alekseon_ajaxifiedProductEdit">
+                    <title>Ajaxified Product Edit</title>
+                    <sort_order>88</sort_order>
+                    <children>
+                        <managegridviews translate="title" module="alekseon_ajaxifiedProductEdit">
+                            <title>Manage Grid Views</title>
+                            <action>adminhtml/ajaxifiedProductEdit_manageGridViews</action>
+                        </managegridviews>
+                    </children>
+                </alekseon_ajaxifiedProductEdit>
+            </children>
+        </system>
+        <catalog>
+            <children>
+                <alekseon_ajaxifiedProductEdit translate="title" module="alekseon_ajaxifiedProductEdit">
+                    <title>Ajaxified Product Edit</title>
+                    <sort_order>2</sort_order>
+                    <action>adminhtml/ajaxifiedProductEdit</action>
+                    <depends><config>alekseon_ajaxifiedProductEdit/general/enabled</config></depends>
+                </alekseon_ajaxifiedProductEdit>
+            </children>        
+        </catalog>
+    </menu>
+   <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <alekseon_adminNotification translate="title" module="alekseon_ajaxifiedProductEdit">
+                                        <title>Alekseon Notifications</title>
+                                        <sort_order>10</sort_order>
+                                    </alekseon_adminNotification>
+                                    <alekseon_ajaxifiedProductEdit translate="title" module="alekseon_ajaxifiedProductEdit">
+                                        <title>Ajaxified Product Edit</title>
+                                        <sort_order>88</sort_order>
+                                    </alekseon_ajaxifiedProductEdit>
+                                </children>
+                            </config>
+                            <alekseon_ajaxifiedProductEdit translate="title">
+                                <title>Ajaxified Product Edit</title>
+                                <children>
+                                    <managegridviews translate="title">
+                                        <title>Manage Grid Views</title>
+                                    </managegridviews>
+                                </children>
+                            </alekseon_ajaxifiedProductEdit>
+                        </children>
+                    </system>
+                    <catalog>
+                        <children>
+                            <alekseon_ajaxifiedProductEdit translate="title">
+                                <title>Ajaxified Product Edit</title>
+                                <sort_order>2</sort_order>
+                            </alekseon_ajaxifiedProductEdit>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>    
+</config>

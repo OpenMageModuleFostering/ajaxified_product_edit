@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Marcin Frymark
+ * @email     contact@alekseon.com
+ * @company   Alekseon
+ * @website   www.alekseon.com
+ */
+-->
+<logging>
+    <catalog_products>
+        <actions>
+            <adminhtml_ajaxifiedProductEdit_saveRow>
+                <action>save</action>
+            </adminhtml_ajaxifiedProductEdit_saveRow>
+        </actions>
+    </catalog_products>
+</logging>

@@ -1,0 +1,77 @@
+<?php
+/**
+ * @author    Marcin Frymark
+ * @email     contact@alekseon.com
+ * @company   Alekseon
+ * @website   www.alekseon.com
+ */
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="width:50%;"><h3 class="icon-head head-products"><?php echo Mage::helper('alekseon_ajaxifiedProductEdit')->__('Ajaxified Product Edit') ?></h3></td>
+            <td class="a-right">
+                <?php echo $this->getButtonsHtml() ?>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+<?php echo $this->getBlockHtml('gridview_switcher')?>
+<?php if(!$this->isSingleStoreMode()): ?>
+    <?php echo $this->getChildHtml('store_switcher');?>
+<?php endif;?>
+<div>
+    <form id="form-ajaxifiedProductEdit" action="" >
+        <input type="hidden" id="store" name="store" value="<?php echo $this->getStoreId() ?>" />
+        <?php echo $this->getGridHtml() ?>
+    </form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+
+var productRow = new ProductRow('form-ajaxifiedProductEdit', '<?php echo $this->__('saving...') ?>', '<?php echo $this->__('Save failed.') ?>');
+
+function saveRow(saveUrl, rowId)
+{
+    if ($('save_button_' + rowId).hasClassName('disabled')) {
+        return false;
+    }
+
+    productRow.save(saveUrl, rowId);
+    
+    return false;
+}
+
+function toggleValueElements(element, inputId)
+{
+    if (element.checked) {
+        $(inputId).up().hide();
+        $(inputId + '[default_value]').up().show();
+    } else {
+        $(inputId).up().show();
+        $(inputId + '[default_value]').up().hide();
+    }
+}
+
+function rowChanged(rowId)
+{
+    $('save_button_' + rowId).removeClassName('disabled');
+    $('save_button_message_' + rowId).update("<?php echo $this->__('Not saved') ?>");
+}
+
+function alertIfDataHasChanged()
+{
+    buttons = $$('.save_button')
+    
+    for(i = 0; i< buttons.length; i++) {
+        if (!buttons[i].hasClassName('disabled')) {
+            return confirm("<?php echo $this->__('All data that hasn\'t been saved will be lost') ?>");
+        }
+    }
+
+    return true;
+}
+
+//]]>
+</script>

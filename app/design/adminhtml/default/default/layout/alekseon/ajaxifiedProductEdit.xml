@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Marcin Frymark
+ * @email     contact@alekseon.com
+ * @company   Alekseon
+ * @website   www.alekseon.com
+ */
+-->
+<layout>
+    <adminhtml_ajaxifiedproductedit_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/alekseon/ajaxifiedProductEdit.js</name></action>
+        </reference>    
+
+        <reference name="content">
+            <block type="alekseon_ajaxifiedProductEdit/adminhtml_gridView" template="alekseon/ajaxifiedProductEdit/gridView.phtml" name="grid_view">
+                <block type="alekseon_ajaxifiedProductEdit/adminhtml_gridViewSwitcher" name="gridview_switcher" as="gridview_switcher" template="alekseon/ajaxifiedProductEdit/gridViewSwitcher.phtml"/>
+                <block type="alekseon_ajaxifiedProductEdit/adminhtml_store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>
+            </block>
+        </reference>
+        
+        <update handle="ajaxifiedProductEdit_grid_input_types" />
+    </adminhtml_ajaxifiedproductedit_index>
+    
+    <adminhtml_ajaxifiedproductedit_saverow>
+        <update handle="ajaxifiedProductEdit_grid_input_types" />
+    </adminhtml_ajaxifiedproductedit_saverow>
+    
+    <ajaxifiedProductEdit_grid_input_types>
+        <block type="core/template" name="use_default"       template="alekseon/ajaxifiedProductEdit/grid/input/usedefault.phtml" />
+        <block type="core/template" name="save_button"       template="alekseon/ajaxifiedProductEdit/grid/input/save.phtml" />
+        <block type="core/template" name="select_input"      template="alekseon/ajaxifiedProductEdit/grid/input/select.phtml" />
+        <block type="core/template" name="text_input"        template="alekseon/ajaxifiedProductEdit/grid/input/text.phtml" />
+        <block type="core/template" name="textarea_input"    template="alekseon/ajaxifiedProductEdit/grid/input/textarea.phtml" />
+        <block type="core/template" name="price_input"       template="alekseon/ajaxifiedProductEdit/grid/input/price.phtml" />
+        <block type="core/template" name="multiselect_input" template="alekseon/ajaxifiedProductEdit/grid/input/multiselect.phtml" />
+        <block type="core/template" name="boolean_input"     template="alekseon/ajaxifiedProductEdit/grid/input/boolean.phtml" />  
+        <block type="core/template" name="hidden_input"      template="alekseon/ajaxifiedProductEdit/grid/input/hidden.phtml" />
+        <block type="core/template" name="date_input"        template="alekseon/ajaxifiedProductEdit/grid/input/date.phtml" />
+    </ajaxifiedProductEdit_grid_input_types>
+    
+    <adminhtml_ajaxifiedproductedit_managegridviews_edit>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/alekseon/ajaxifiedProductEdit.js</name></action>
+        </reference>    
+        <reference name="content">
+            <block type="alekseon_ajaxifiedProductEdit/adminhtml_gridView_manager_edit" name="grid_view_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="alekseon_ajaxifiedProductEdit/adminhtml_gridView_manager_edit_tabs" name="grid_view_edit_tabs">
+                <action method="addTab"><name>general</name><block>alekseon_ajaxifiedProductEdit/adminhtml_gridView_manager_edit_tabs_general</block></action>
+                <action method="addTab"><name>manage_columns</name><block>alekseon_ajaxifiedProductEdit/adminhtml_gridView_manager_edit_tabs_manageColumns</block></action>
+            </block>
+        </reference>
+    </adminhtml_ajaxifiedproductedit_managegridviews_edit>
+    
+    <adminhtml_ajaxifiedproductedit_managegridviews_managecolumns>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="alekseon_ajaxifiedProductEdit/adminhtml_gridView_manager_edit_tabs_manageColumns_attributes" name="grid_view_edit_tabs_manage_columns_attributes"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <reference name="related_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>grid_view_edit_tabs_manage_columns_attributes</grid_block_name>
+                        <data_callback>getSelectedAttributes</data_callback>
+                        <hidden_input_name>columns[attributes]</hidden_input_name>
+                        <reload_param_name>gridview_selected_attributes</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>gridview_selectedattributes_position</input_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>gridview_selectedattributes_editable</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_ajaxifiedproductedit_managegridviews_managecolumns>
+    
+    <adminhtml_ajaxifiedproductedit_managegridviews_managecolumnsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="alekseon_ajaxifiedProductEdit/adminhtml_gridView_manager_edit_tabs_manageColumns_attributes" name="grid_view_edit_tabs_manage_columns_attributes"/>
+        </block>
+    </adminhtml_ajaxifiedproductedit_managegridviews_managecolumnsgrid>
+
+</layout>

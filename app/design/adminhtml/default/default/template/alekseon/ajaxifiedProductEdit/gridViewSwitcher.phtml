@@ -1,0 +1,36 @@
+<?php
+/**
+ * @author    Marcin Frymark
+ * @email     contact@alekseon.com
+ * @company   Alekseon
+ * @website   www.alekseon.com
+ */
+?>
+<p class="switcher">
+    <b><?php echo $this->getCurrentGridView()->getLabel(); ?></b>
+    <br />
+    <?php echo $this->getCurrentGridView()->getDescription(); ?>
+    <?php if ($this->getGridViews()->count() > 1): ?>
+        <br />
+        <label for="attributes_switcher"><?php echo $this->__('Change Grid View') ?>:</label>
+        <select name="attributes_switcher" id="attributes_switcher" onchange="return switchGridView(this);">
+            <?php foreach($this->getGridViews() as $gridView): ?>
+                <option value="<?php echo $gridView->getId() ?>"<?php if ($this->getCurrentGridView()->getId() == $gridView->getId()): ?> selected="selected"<?php endif; ?>><?php echo $gridView->getLabel() ?></option>
+            <?php endforeach ?>
+        </select>
+        <script type="text/javascript">
+            function switchGridView(obj){
+                var viewParam = obj.value ? 'view/' + obj.value + '/' : '';
+                if(obj.viewParams){
+                    viewParam += obj.viewParams;
+                }
+                if (alertIfDataHasChanged()) {
+                    setLocation('<?php echo $this->getSwitchUrl() ?>' + viewParam);
+                } else {
+                    obj.value = '<?php echo $this->getCurrentGridView()->getId()?>';
+                    return false;
+                }               
+            }
+        </script>    
+    <?php endif ?>
+</p>

@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/ajaxified_product_edit",
+    "name": "OpenMageModuleFostering\/ajaxified_product_edit",
     "type": "magento-module",
     "license": "OSL-v3.0",
     "homepage": "",
     "description": "This module will help you manage the product attributes.",
     "authors": [
-    {
-        "name": "Marcin Frymark",
-        "email": "contact@alekseon.com"
-    }
-],
+        {
+            "name": "Marcin Frymark",
+            "email": "contact@alekseon.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
